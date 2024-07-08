@@ -37,7 +37,7 @@ const Header: FC = () => {
     const isActive = (path: string) => path === pathName
 
     return (
-        <header className="mx-auto mb-6 flex max-w-screen-2xl items-center justify-between gap-4">
+        <header className="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-4 pt-12">
             <Image
                 src={mainLogo}
                 alt="main logo header image"
@@ -79,7 +79,7 @@ interface LinkProps {
 
 const NavLink: FC<LinkProps> = ({ children, path, classes }) => {
     const defaultStyles =
-        "relative text-xl text-zinc-50 font-light after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-px after:origin-top-right after:scale-x-0 after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:after:origin-top-left hover:after:scale-x-100 focus-within:border-zinc-50 focus-within:border-[0.5px] focus-within:rounded-sm focus-within:border-spacing-2"
+        "relative text-xl text-zinc-50 font-light after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-px after:origin-top-right after:scale-x-0 after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:after:origin-top-left hover:after:scale-x-100 focus-within:border-zinc-50 focus-within:border-[0.5px] focus-within:rounded-sm focus-within:border-spacing-2 after:rounded-full"
 
     return (
         <Link href={path} className={cn(defaultStyles, classes)}>

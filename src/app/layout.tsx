@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter as FontSans } from 'next/font/google'
+import { Roboto as FontSans } from 'next/font/google'
 import '@/styles/globals.css'
 
 import { cn } from '@/lib/utils'
@@ -8,6 +8,7 @@ import Header from '@/components/pages/header'
 const fontSans = FontSans({
     subsets: ['latin'],
     variable: '--font-sans',
+    weight: '300',
 })
 
 export const metadata: Metadata = {
@@ -21,10 +22,11 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className="dark">
             <body
+                style={{ gridTemplateRows: 'auto 1fr' }}
                 className={cn(
-                    'min-h-screen font-sans antialiased',
+                    'grid min-h-screen gap-6 font-sans antialiased',
                     fontSans.variable
                 )}
             >
