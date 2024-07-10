@@ -14,3 +14,11 @@ export const fetchHomePage = async () => {
 
     return data[0]
 }
+
+export const fetchSocialLinks = async () => {
+    if (!process.env.NEXT_SOCIALS_DATA_QUERY) return
+
+    const data = await client.fetch(process.env.NEXT_SOCIALS_DATA_QUERY)
+
+    return data
+}

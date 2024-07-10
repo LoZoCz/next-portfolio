@@ -26,7 +26,7 @@ export default function RootLayout({
             <body
                 style={{ gridTemplateRows: 'auto 1fr' }}
                 className={cn(
-                    'grid min-h-screen gap-6 font-sans antialiased',
+                    'grid min-h-screen gap-8 font-sans antialiased md:gap-12',
                     fontSans.variable
                 )}
             >

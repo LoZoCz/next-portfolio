@@ -4,17 +4,17 @@ import PortableText from 'react-portable-text'
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
     children: string | ReactNode
-    classes?: string
+    className?: string
 }
 
 interface ParaProps extends HTMLAttributes<HTMLParagraphElement> {
     children: string | ReactNode
-    classes?: string
+    className?: string
 }
 
 interface TextFormatProps {
     content: object[]
-    classes?: string
+    className?: string
 }
 
 interface TextFormatSerailizersTypes {
@@ -27,13 +27,13 @@ const textSerializers = {
     p: ({ children }: TextFormatSerailizersTypes) => <Para>{children}</Para>,
 }
 
-export const H1: FC<HeadingProps> = ({ children, classes, ...props }) => {
+export const H1: FC<HeadingProps> = ({ children, className, ...props }) => {
     return (
         <h1
             {...props}
             className={cn(
-                'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
-                classes
+                'scroll-m-20 text-4xl font-black tracking-tight lg:text-5xl',
+                className
             )}
         >
             {children}
@@ -41,13 +41,13 @@ export const H1: FC<HeadingProps> = ({ children, classes, ...props }) => {
     )
 }
 
-export const H2: FC<HeadingProps> = ({ children, classes, ...props }) => {
+export const H2: FC<HeadingProps> = ({ children, className, ...props }) => {
     return (
         <h1
             {...props}
             className={cn(
                 'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
-                classes
+                className
             )}
         >
             {children}
@@ -55,23 +55,23 @@ export const H2: FC<HeadingProps> = ({ children, classes, ...props }) => {
     )
 }
 
-export const Para: FC<ParaProps> = ({ children, classes, ...props }) => {
+export const Para: FC<ParaProps> = ({ children, className, ...props }) => {
     return (
         <p
             {...props}
-            className={cn('leading-7 [&:not(:first-child)]:mt-6', classes)}
+            className={cn('leading-7 [&:not(:first-child)]:mt-6', className)}
         >
             {children}
         </p>
     )
 }
 
-export const TextFormat: FC<TextFormatProps> = ({ content, classes }) => {
+export const TextFormat: FC<TextFormatProps> = ({ content, className }) => {
     return (
         <PortableText
             content={content}
             serializers={textSerializers}
-            className={classes}
+            className={className}
         />
     )
 }

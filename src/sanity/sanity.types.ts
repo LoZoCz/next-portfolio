@@ -18,3 +18,14 @@ export interface Child {
     text: string
     _key: string
 }
+
+export interface SocialLinkTypes {
+    _id: string
+    title: string
+    link: string
+    icon: Icon
+}
+
+export interface Icon {
+    url: string
+}
