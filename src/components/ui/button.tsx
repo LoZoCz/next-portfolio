@@ -23,6 +23,10 @@ const buttonVariants = cva(
                     "relative before:absolute before:-top-0.5 before:left-0 before:right-0 before:h-px before:origin-top-left before:scale-x-0 before:rounded-full before:bg-zinc-50 before:transition-transform before:duration-300 before:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-px after:origin-top-right after:scale-x-0 after:rounded-full after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:before:origin-top-right hover:before:scale-x-100 hover:after:origin-top-left hover:after:scale-x-100",
                 lefRigBar:
                     "relative before:absolute before:-left-0.5 before:bottom-0 before:top-0 before:w-px before:origin-bottom-left before:scale-y-0 before:rounded-full before:bg-zinc-50 before:transition-transform before:duration-300 before:content-[''] after:absolute after:-right-0.5 after:bottom-0 after:top-0 after:w-px after:origin-top-left after:scale-y-0 after:rounded-full after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:before:origin-top-left hover:before:scale-y-100 hover:after:origin-bottom-left hover:after:scale-y-100",
+                blockSlideBot:
+                    "relative font-medium transition-colors duration-300 after:absolute after:-left-1 after:-right-1 after:bottom-0 after:-z-10 after:h-full after:origin-top after:scale-y-0 after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:text-zinc-950 hover:after:origin-bottom hover:after:scale-y-100",
+                blockSlideTop:
+                    "relative font-medium transition-colors duration-300 after:absolute after:-left-1 after:-right-1 after:bottom-0 after:-z-10 after:h-full after:origin-bottom after:scale-y-0 after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:text-zinc-950 hover:after:origin-top hover:after:scale-y-100",
             },
             size: {
                 default: 'h-10 px-4 py-2',

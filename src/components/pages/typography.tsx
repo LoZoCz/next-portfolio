@@ -24,7 +24,15 @@ interface TextFormatSerailizersTypes {
 const textSerializers = {
     h1: ({ children }: TextFormatSerailizersTypes) => <H1>{children}</H1>,
     h2: ({ children }: TextFormatSerailizersTypes) => <H2>{children}</H2>,
-    p: ({ children }: TextFormatSerailizersTypes) => <Para>{children}</Para>,
+    normal: ({ children }: TextFormatSerailizersTypes) => (
+        <Para>{children}</Para>
+    ),
+    unknownType: ({ children }: TextFormatSerailizersTypes) => (
+        <Para className="text-red-500">{children}</Para>
+    ),
+    block: ({ children }: TextFormatSerailizersTypes) => (
+        <Para>{children}</Para>
+    ),
 }
 
 export const H1: FC<HeadingProps> = ({ children, className, ...props }) => {
@@ -43,15 +51,28 @@ export const H1: FC<HeadingProps> = ({ children, className, ...props }) => {
 
 export const H2: FC<HeadingProps> = ({ children, className, ...props }) => {
     return (
-        <h1
+        <h2
             {...props}
             className={cn(
-                'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+                'mb-2 w-fit scroll-m-20 border-b border-zinc-100 text-3xl font-semibold tracking-tight first:mt-0',
                 className
             )}
         >
             {children}
-        </h1>
+        </h2>
+    )
+}
+export const H3: FC<HeadingProps> = ({ children, className, ...props }) => {
+    return (
+        <h3
+            {...props}
+            className={cn(
+                'scroll-m-20 text-2xl font-semibold tracking-tight',
+                className
+            )}
+        >
+            {children}
+        </h3>
     )
 }
 
@@ -59,7 +80,10 @@ export const Para: FC<ParaProps> = ({ children, className, ...props }) => {
     return (
         <p
             {...props}
-            className={cn('leading-7 [&:not(:first-child)]:mt-6', className)}
+            className={cn(
+                'font-light leading-7 [&:not(:first-child)]:mt-4',
+                className
+            )}
         >
             {children}
         </p>

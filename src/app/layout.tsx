@@ -8,7 +8,7 @@ import Header from '@/components/pages/header'
 const fontSans = FontSans({
     subsets: ['latin'],
     variable: '--font-sans',
-    weight: '300',
+    weight: ['100', '300', '400', '500', '700', '900'],
 })
 
 export const metadata: Metadata = {

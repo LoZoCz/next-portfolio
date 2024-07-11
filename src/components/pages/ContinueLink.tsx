@@ -13,7 +13,7 @@ const ContinueLink: FC<LinkProps> = ({ children, path, className }) => {
     return (
         <Link
             className={cn(
-                'group relative flex items-center gap-2 font-normal after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-px after:origin-top-right after:scale-x-0 after:rounded-full after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[""] focus-within:border-spacing-2 focus-within:rounded-sm focus-within:border-[0.5px] focus-within:border-zinc-50 hover:after:origin-top-left hover:after:scale-x-100',
+                'group relative flex w-fit items-center gap-2 font-normal after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-px after:origin-top-right after:scale-x-0 after:rounded-full after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[""] hover:after:origin-top-left hover:after:scale-x-100',
                 className
             )}
             href={path}

@@ -5,3 +5,5 @@ export default function Contact() {
         </main>
     )
 }
+
+// zrob strone z kontaktem do mnie na maila
