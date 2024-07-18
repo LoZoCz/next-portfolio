@@ -27,6 +27,13 @@ export interface ProjectsPageTypes {
     projects: Project[]
 }
 
+// Contact page ts types
+export interface ContactPageTypes {
+    title: string
+    content: Content[]
+    bottomLink: string
+}
+
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Additional ts types

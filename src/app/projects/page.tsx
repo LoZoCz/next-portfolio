@@ -55,7 +55,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ image, children }) => {
                     alt="project main img"
                     width={1000}
                     height={500}
-                    className="z-10 rounded-md"
+                    className="z-10 h-auto w-auto rounded-md"
                 />
             </div>
             <div className="static bottom-0 left-0 right-0 z-50 flex flex-col gap-4 self-end pt-4 lg:absolute lg:flex-row lg:items-end lg:justify-between lg:gap-12 lg:p-4">

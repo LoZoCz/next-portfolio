@@ -19,6 +19,7 @@ interface TextFormatProps {
 
 interface TextFormatSerailizersTypes {
     children: string | ReactNode
+    mark?: { blank: string; href: string }
 }
 
 const textSerializers = {
@@ -27,11 +28,13 @@ const textSerializers = {
     normal: ({ children }: TextFormatSerailizersTypes) => (
         <Para>{children}</Para>
     ),
-    unknownType: ({ children }: TextFormatSerailizersTypes) => (
-        <Para className="text-red-500">{children}</Para>
-    ),
     block: ({ children }: TextFormatSerailizersTypes) => (
         <Para>{children}</Para>
+    ),
+    link: ({ children, mark }: TextFormatSerailizersTypes) => (
+        <a href={mark?.href} target="_blank">
+            {children}
+        </a>
     ),
 }
 

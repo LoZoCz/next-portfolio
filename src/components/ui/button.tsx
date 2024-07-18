@@ -27,6 +27,8 @@ const buttonVariants = cva(
                     "relative font-medium transition-colors duration-300 after:absolute after:-left-1 after:-right-1 after:bottom-0 after:-z-10 after:h-full after:origin-top after:scale-y-0 after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:text-zinc-950 hover:after:origin-bottom hover:after:scale-y-100",
                 blockSlideTop:
                     "relative font-medium transition-colors duration-300 after:absolute after:-left-1 after:-right-1 after:bottom-0 after:-z-10 after:h-full after:origin-bottom after:scale-y-0 after:bg-zinc-50 after:transition-transform after:duration-300 after:content-[''] hover:text-zinc-950 hover:after:origin-top hover:after:scale-y-100",
+                blockBtn:
+                    "relative font-medium bg-background/25 border border-[0.5px] border-zinc-400 transition-colors rounded-md duration-300 after:absolute after:-left-1 after:-right-1 after:bottom-0 after:-z-10 after:h-full after:origin-top after:scale-y-0 after:bg-zinc-50 after:transition-transform hover:bg-background/0 overflow-hidden after:duration-300 after:content-[''] hover:text-zinc-950 hover:after:origin-bottom hover:border-zinc-50 hover:after:scale-y-100",
             },
             size: {
                 default: 'h-10 px-4 py-2',

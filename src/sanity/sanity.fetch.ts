@@ -32,11 +32,20 @@ const fetchProjectsPage = async () => {
     return data[0]
 }
 
+const fetchContactPage = async () => {
+    if (!process.env.NEXT_CONTACT_DATA_QUERY) return
+
+    const data = await client.fetch(process.env.NEXT_CONTACT_DATA_QUERY)
+
+    return data[0]
+}
+
 const DLFetch = {
     fetchHomePage,
     fetchSocialLinks,
     fetchAboutPage,
     fetchProjectsPage,
+    fetchContactPage,
 }
 
 export default DLFetch

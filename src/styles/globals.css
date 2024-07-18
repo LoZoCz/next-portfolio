@@ -87,6 +87,11 @@
     @apply bg-zinc-50 hover:bg-zinc-500;
 }
 
+body,
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     --grid-bg: linear-gradient(#3f3f4682 1px, transparent 1px),
         linear-gradient(90deg, #3f3f4682 1px, transparent 1px);
