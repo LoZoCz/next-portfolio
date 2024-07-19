@@ -1,44 +1,45 @@
+import { cache } from 'react'
 import { client } from './sanity.client'
 
-const fetchHomePage = async () => {
-    if (!process.env.NEXT_HOME_DATA_QUERY) return
+const fetchHomePage = cache(async () => {
+    if (!process.env.HOME_DATA_QUERY) return
 
-    const data = await client.fetch(process.env.NEXT_HOME_DATA_QUERY)
+    const data = await client.fetch(process.env.HOME_DATA_QUERY)
 
     return data[0]
-}
+})
 
-const fetchSocialLinks = async () => {
-    if (!process.env.NEXT_SOCIALS_DATA_QUERY) return
+const fetchSocialLinks = cache(async () => {
+    if (!process.env.SOCIALS_DATA_QUERY) return
 
-    const data = await client.fetch(process.env.NEXT_SOCIALS_DATA_QUERY)
+    const data = await client.fetch(process.env.SOCIALS_DATA_QUERY)
 
     return data
-}
+})
 
-const fetchAboutPage = async () => {
-    if (!process.env.NEXT_ABOUT_DATA_QUERY) return
+const fetchAboutPage = cache(async () => {
+    if (!process.env.ABOUT_DATA_QUERY) return
 
-    const data = await client.fetch(process.env.NEXT_ABOUT_DATA_QUERY)
-
-    return data[0]
-}
-
-const fetchProjectsPage = async () => {
-    if (!process.env.NEXT_PROJECTS_DATA_QUERY) return
-
-    const data = await client.fetch(process.env.NEXT_PROJECTS_DATA_QUERY)
+    const data = await client.fetch(process.env.ABOUT_DATA_QUERY)
 
     return data[0]
-}
+})
 
-const fetchContactPage = async () => {
-    if (!process.env.NEXT_CONTACT_DATA_QUERY) return
+const fetchProjectsPage = cache(async () => {
+    if (!process.env.PROJECTS_DATA_QUERY) return
 
-    const data = await client.fetch(process.env.NEXT_CONTACT_DATA_QUERY)
+    const data = await client.fetch(process.env.PROJECTS_DATA_QUERY)
 
     return data[0]
-}
+})
+
+const fetchContactPage = cache(async () => {
+    if (!process.env.CONTACT_DATA_QUERY) return
+
+    const data = await client.fetch(process.env.CONTACT_DATA_QUERY)
+
+    return data[0]
+})
 
 const DLFetch = {
     fetchHomePage,

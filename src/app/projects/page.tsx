@@ -3,7 +3,8 @@ import MainCont from '@/components/pages/MainCont'
 import { H1, H3, TextFormat } from '@/components/pages/typography'
 import { Button } from '@/components/ui/button'
 import DLFetch from '@/sanity/sanity.fetch'
-import { Content, ProjectsPageTypes } from '@/sanity/sanity.types'
+import { ProjectsPageTypes } from '@/sanity/sanity.types'
+import { PortableTextBlock } from '@portabletext/types'
 import Image from 'next/image'
 import { FC, ReactNode } from 'react'
 
@@ -18,7 +19,7 @@ interface LinksTypes {
 }
 interface ContentTypes {
     name: string
-    desc: Content[]
+    desc: PortableTextBlock
 }
 
 export default async function Projects() {
@@ -85,7 +86,7 @@ const ProjectContent: FC<ContentTypes> = ({ name, desc }) => {
     return (
         <div>
             <H3>{name}</H3>
-            <TextFormat content={desc} />
+            <TextFormat value={desc} />
         </div>
     )
 }

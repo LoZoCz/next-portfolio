@@ -1,8 +1,10 @@
+import { PortableTextBlock } from '@portabletext/types'
+
 // Home page ts types
 export interface HomePageTypes {
     title: string
     bottomLink: string
-    content: Content[]
+    content: PortableTextBlock
 }
 
 // About page ts types
@@ -30,20 +32,13 @@ export interface ProjectsPageTypes {
 // Contact page ts types
 export interface ContactPageTypes {
     title: string
-    content: Content[]
+    content: PortableTextBlock
     bottomLink: string
 }
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Additional ts types
-export interface Content {
-    _type: string
-    style: string
-    _key: string
-    markDefs: any[]
-    children: Child[]
-}
 
 export interface Child {
     _type: string
@@ -60,7 +55,7 @@ export interface AboutSection {
     subtitle: string
     _type: string
     _key: string
-    content: Content[]
+    content: PortableTextBlock
 }
 
 export interface Project {
@@ -68,7 +63,7 @@ export interface Project {
     slug: Slug
     github: string
     demo: string
-    content: Content[]
+    content: PortableTextBlock
     imageUrl: string
     _id: string
 }

@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils'
-import { FC, HTMLAttributes, ReactNode } from 'react'
-import PortableText from 'react-portable-text'
+import { AnchorHTMLAttributes, FC, HTMLAttributes, ReactNode } from 'react'
+import { PortableText, PortableTextComponents } from '@portabletext/react'
+import { TypedObject } from '@portabletext/types'
+import { link } from 'fs'
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
     children: string | ReactNode
@@ -12,30 +14,27 @@ interface ParaProps extends HTMLAttributes<HTMLParagraphElement> {
     className?: string
 }
 
-interface TextFormatProps {
-    content: object[]
+interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+    children: string | ReactNode
     className?: string
 }
 
-interface TextFormatSerailizersTypes {
-    children: string | ReactNode
-    mark?: { blank: string; href: string }
+interface TextFormatProps {
+    value: TypedObject
+    className?: string
 }
 
-const textSerializers = {
-    h1: ({ children }: TextFormatSerailizersTypes) => <H1>{children}</H1>,
-    h2: ({ children }: TextFormatSerailizersTypes) => <H2>{children}</H2>,
-    normal: ({ children }: TextFormatSerailizersTypes) => (
-        <Para>{children}</Para>
-    ),
-    block: ({ children }: TextFormatSerailizersTypes) => (
-        <Para>{children}</Para>
-    ),
-    link: ({ children, mark }: TextFormatSerailizersTypes) => (
-        <a href={mark?.href} target="_blank">
-            {children}
-        </a>
-    ),
+const textSerializers: PortableTextComponents = {
+    block: {
+        h1: ({ children }) => <H1>{children}</H1>,
+        h2: ({ children }) => <H2>{children}</H2>,
+        normal: (props) => <Para>{props.children}</Para>,
+    },
+    marks: {
+        link: ({ children, value }) => (
+            <Anchor href={value.href}>{children}</Anchor>
+        ),
+    },
 }
 
 export const H1: FC<HeadingProps> = ({ children, className, ...props }) => {
@@ -93,12 +92,24 @@ export const Para: FC<ParaProps> = ({ children, className, ...props }) => {
     )
 }
 
-export const TextFormat: FC<TextFormatProps> = ({ content, className }) => {
+export const Anchor: FC<AnchorProps> = ({ children, className, ...props }) => {
     return (
-        <PortableText
-            content={content}
-            serializers={textSerializers}
-            className={className}
-        />
+        <a
+            {...props}
+            className={cn(
+                'font-medium text-primary underline underline-offset-4 hover:text-primary/75',
+                className
+            )}
+        >
+            {children}
+        </a>
+    )
+}
+
+export const TextFormat: FC<TextFormatProps> = ({ value, className }) => {
+    return (
+        <div className={cn('space-y-6', className)}>
+            <PortableText value={value} components={textSerializers} />
+        </div>
     )
 }

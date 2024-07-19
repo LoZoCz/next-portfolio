@@ -13,7 +13,7 @@ export default async function About() {
             {aboutData.aboutSections.map((section) => (
                 <section key={section._key}>
                     <H2>{section.subtitle}</H2>
-                    <TextFormat content={section.content} />
+                    <TextFormat value={section.content} />
                 </section>
             ))}
             <Footer bottomLink={aboutData.bottomLink} path="/projects" />
