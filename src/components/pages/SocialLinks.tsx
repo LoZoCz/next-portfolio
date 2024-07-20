@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { buttonVariants } from '../ui/button'
 import { SocialLinkTypes } from '@/sanity/sanity.types'
-import DLFetch from '@/sanity/sanity.fetch'
 import Image from 'next/image'
+import fetchData from '@/sanity/sanity.fetch'
 
 const SocialLinks: FC = async () => {
-    const socials: SocialLinkTypes[] = await DLFetch.fetchSocialLinks()
+    const socials: SocialLinkTypes[] = await fetchData('socials', false)
 
     return (
         <div className="flex items-center gap-4">

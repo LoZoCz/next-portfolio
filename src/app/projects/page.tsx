@@ -1,5 +1,4 @@
 import Footer from '@/components/pages/footer'
-import MainCont from '@/components/pages/MainCont'
 import { H1, H3, TextFormat } from '@/components/pages/typography'
 import { Button } from '@/components/ui/button'
 import fetchData from '@/sanity/sanity.fetch'
@@ -26,7 +25,7 @@ export default async function Projects() {
     const projectData: ProjectsPageTypes = await fetchData('projects', true)
 
     return (
-        <MainCont>
+        <>
             <H1>{projectData.title}</H1>
             <section className="space-y-8">
                 {projectData.projects.map((project) => (
@@ -43,7 +42,7 @@ export default async function Projects() {
                 ))}
             </section>
             <Footer bottomLink={projectData.bottomLink} path="/contact" />
-        </MainCont>
+        </>
     )
 }
 

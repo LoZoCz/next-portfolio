@@ -7,6 +7,7 @@ import { FC } from 'react'
 import mainLogo from '@/../public/thinIcon.svg'
 import { FileCode, House, Send, User } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { motion } from 'framer-motion'
 
 const paths = [
     {
@@ -37,7 +38,12 @@ const Header: FC = () => {
     const isActive = (path: string) => path === pathName
 
     return (
-        <header className="mx-auto flex w-full max-w-screen-xl items-center justify-between gap-4 pt-6 md:pt-12">
+        <motion.header
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ ease: 'easeInOut', duration: 0.5 }}
+            className="mx-auto flex w-full max-w-screen-xl items-center justify-between gap-4 pt-6 md:pt-12"
+        >
             <Image
                 src={mainLogo}
                 alt="main logo header image"
@@ -67,7 +73,7 @@ const Header: FC = () => {
                     ))}
                 </ul>
             </nav>
-        </header>
+        </motion.header>
     )
 }
 

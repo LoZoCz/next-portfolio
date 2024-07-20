@@ -23,11 +23,14 @@
         "react": "^18",
         "react-dom": "^18",
         "react-email": "2.1.5",
+        "react-hook-form": "^7.52.1",
         "resend": "^3.4.0",
         "tailwind-merge": "^2.4.0",
-        "tailwindcss-animate": "^1.0.7"
+        "tailwindcss-animate": "^1.0.7",
+        "zod": "^3.23.8"
     },
     "devDependencies": {
+        "@hookform/resolvers": "^3.9.0",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
@@ -36,6 +39,7 @@
         "postcss": "^8",
         "prettier": "^3.3.2",
         "prettier-plugin-tailwindcss": "^0.6.5",
+        "react-toastify": "^10.0.5",
         "tailwindcss": "^3.4.1",
         "typescript": "^5"
     }

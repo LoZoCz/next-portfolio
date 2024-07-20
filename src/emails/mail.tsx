@@ -19,9 +19,7 @@ const Mail: FC<Readonly<EmailProps>> = ({ name, mail, content }) => {
     return (
         <Tailwind>
             <Html className="bg-zinc-900">
-                <Head>
-                    <title>Nowy mail od {name}</title>
-                </Head>
+                <Head>Nowy mail od {name}</Head>
                 <Preview>{content}</Preview>
                 <Body className="bg-zinc-900 font-sans text-zinc-50">
                     <Container>
