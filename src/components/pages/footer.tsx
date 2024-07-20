@@ -6,6 +6,7 @@ import { Button } from '../ui/button'
 import { SocialLinkTypes } from '@/sanity/sanity.types'
 import DLFetch from '@/sanity/sanity.fetch'
 import Image from 'next/image'
+import fetchData from '@/sanity/sanity.fetch'
 
 interface LinkProps {
     children: string
@@ -46,7 +47,7 @@ const ContinueLink: FC<LinkProps> = ({ children, path, className }) => {
 }
 
 const SocialLinks: FC = async () => {
-    const socials: SocialLinkTypes[] = await DLFetch.fetchSocialLinks()
+    const socials: SocialLinkTypes[] = await fetchData('socials', false)
 
     return (
         <div className="flex items-center gap-4">

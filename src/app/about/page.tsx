@@ -1,11 +1,11 @@
 import Footer from '@/components/pages/footer'
 import MainCont from '@/components/pages/MainCont'
 import { H1, H2, TextFormat } from '@/components/pages/typography'
-import DLFetch from '@/sanity/sanity.fetch'
+import fetchData from '@/sanity/sanity.fetch'
 import { AboutPageTypes } from '@/sanity/sanity.types'
 
 export default async function About() {
-    const aboutData: AboutPageTypes = await DLFetch.fetchAboutPage()
+    const aboutData: AboutPageTypes = await fetchData('about', true)
 
     return (
         <MainCont>

@@ -2,7 +2,7 @@ import Footer from '@/components/pages/footer'
 import MainCont from '@/components/pages/MainCont'
 import { H1, H3, TextFormat } from '@/components/pages/typography'
 import { Button } from '@/components/ui/button'
-import DLFetch from '@/sanity/sanity.fetch'
+import fetchData from '@/sanity/sanity.fetch'
 import { ProjectsPageTypes } from '@/sanity/sanity.types'
 import { PortableTextBlock } from '@portabletext/types'
 import Image from 'next/image'
@@ -23,7 +23,7 @@ interface ContentTypes {
 }
 
 export default async function Projects() {
-    const projectData: ProjectsPageTypes = await DLFetch.fetchProjectsPage()
+    const projectData: ProjectsPageTypes = await fetchData('projects', true)
 
     return (
         <MainCont>

@@ -101,7 +101,6 @@ body {
         radial-gradient(at 50% 75%, #7c3aed 0px, transparent 50%),
         radial-gradient(at 10% 60%, #059669 0px, transparent 40%),
         radial-gradient(at 80% 55%, #e11d48 0px, transparent 70%);
-    --red-bg: red;
 
     @apply bg-zinc-900 p-8;
 

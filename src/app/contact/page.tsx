@@ -5,11 +5,11 @@ import { H1, TextFormat } from '@/components/pages/typography'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import DLFetch from '@/sanity/sanity.fetch'
 import { ContactPageTypes } from '@/sanity/sanity.types'
+import fetchData from '@/sanity/sanity.fetch'
 
 export default async function Contact() {
-    const contactData: ContactPageTypes = await DLFetch.fetchContactPage()
+    const contactData: ContactPageTypes = await fetchData('contact', true)
 
     return (
         <MainCont className="md:pb-4">
