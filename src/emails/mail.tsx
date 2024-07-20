@@ -25,13 +25,13 @@ const Mail: FC<Readonly<EmailProps>> = ({ name, mail, content }) => {
                 <Preview>{content}</Preview>
                 <Body className="bg-zinc-900 font-sans text-zinc-50">
                     <Container>
-                        <Text className="scroll-m-20 text-4xl font-semibold tracking-tight">
+                        <Text className="scroll-m-20 text-4xl font-semibold tracking-tight text-zinc-50">
                             Napisał do ciebie: {name}
                         </Text>
-                        <Text className="mb-12 scroll-m-20 text-2xl font-normal tracking-tight">
+                        <Text className="mb-12 scroll-m-20 text-2xl font-normal tracking-tight text-zinc-50">
                             Mail autora: {mail}
                         </Text>
-                        <Text className="text-lg font-light leading-7 [&:not(:first-child)]:mt-4">
+                        <Text className="text-lg font-light leading-7 text-zinc-50 [&:not(:first-child)]:mt-4">
                             {content}
                         </Text>
                     </Container>
