@@ -19,6 +19,16 @@ interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     className?: string
 }
 
+interface StrongProps extends HTMLAttributes<HTMLElement> {
+    children: string | ReactNode
+    className?: string
+}
+
+interface UListProps extends HTMLAttributes<HTMLUListElement> {
+    children: string | ReactNode
+    className?: string
+}
+
 interface TextFormatProps {
     value: TypedObject
     className?: string
@@ -28,12 +38,17 @@ const textSerializers: PortableTextComponents = {
     block: {
         h1: ({ children }) => <H1>{children}</H1>,
         h2: ({ children }) => <H2>{children}</H2>,
+        h3: ({ children }) => <H3>{children}</H3>,
         normal: (props) => <Para>{props.children}</Para>,
     },
     marks: {
         link: ({ children, value }) => (
             <Anchor href={value.href}>{children}</Anchor>
         ),
+        strong: ({ children }) => <Strong>{children}</Strong>,
+    },
+    list: {
+        bullet: ({ children }) => <BulletList>{children}</BulletList>,
     },
 }
 
@@ -103,6 +118,32 @@ export const Anchor: FC<AnchorProps> = ({ children, className, ...props }) => {
         >
             {children}
         </a>
+    )
+}
+
+export const Strong: FC<StrongProps> = ({ children, className, ...props }) => {
+    return (
+        <strong
+            {...props}
+            className={cn('font-semibold text-primary', className)}
+        >
+            {children}
+        </strong>
+    )
+}
+
+export const BulletList: FC<UListProps> = ({
+    children,
+    className,
+    ...props
+}) => {
+    return (
+        <ul
+            {...props}
+            className={cn('my-6 ml-6 list-disc [&>li]:mt-2', className)}
+        >
+            {children}
+        </ul>
     )
 }
 
