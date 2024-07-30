@@ -1,25 +1,39 @@
+'use server'
+
 import { cache } from 'react'
 import { client } from './sanity.client'
 
-const queries = {
-    home: process.env.HOME_DATA_QUERY,
-    socials: process.env.SOCIALS_DATA_QUERY,
-    about: process.env.ABOUT_DATA_QUERY,
-    projects: process.env.PROJECTS_DATA_QUERY,
-    contact: process.env.CONTACT_DATA_QUERY,
-}
+export const fetchHome = cache(async () => {
+    const query = `*[_type == "home"]{title, bottomLink, content}`
+    const data = await client.fetch(query)
 
-type QueryKey = keyof typeof queries
+    return data[0]
+})
 
-const fetchData = cache(
-    async (queryKey: QueryKey, isSingle: boolean = false) => {
-        const query = queries[queryKey]
-        if (!query) throw new Error(`Invalid query key ${queryKey}`)
+export const fetchAbout = cache(async () => {
+    const query = `*[_type == "about"]{title, bottomLink, aboutSections}`
+    const data = await client.fetch(query)
 
-        const data = await client.fetch(query)
+    return data[0]
+})
 
-        return isSingle ? data[0] : data
-    }
-)
+export const fetchProjects = cache(async () => {
+    const query = `*[_type == "Projects-Page"]{title, bottomLink, "projects": projects[]->{_id,title,slug,tags,github,demo,content,"imageUrl": image.asset->url}}`
+    const data = await client.fetch(query)
 
-export default fetchData
+    return data[0]
+})
+
+export const fetchContact = cache(async () => {
+    const query = `*[_type == "contact"]{title, content, bottomLink}`
+    const data = await client.fetch(query)
+
+    return data[0]
+})
+
+export const fetchSocials = cache(async () => {
+    const query = `*[_type == "socials"]{_id,title,link,icon{"url":asset->url}}`
+    const data = await client.fetch(query)
+
+    return data
+})

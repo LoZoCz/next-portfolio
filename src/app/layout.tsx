@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { Roboto as FontSans } from 'next/font/google'
 import '@/styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css'
-
 import { cn } from '@/lib/utils'
-import Header from '@/components/pages/header'
+import Header from '@/components/custom/header'
 
 const fontSans = FontSans({
     subsets: ['latin'],
@@ -23,7 +22,7 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="en" className="dark">
+        <html lang="pl" className="dark">
             <body
                 style={{ gridTemplateRows: 'auto 1fr' }}
                 className={cn(

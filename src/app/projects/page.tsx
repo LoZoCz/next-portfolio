@@ -1,7 +1,8 @@
-import Footer from '@/components/pages/footer'
-import { H1, H3, TextFormat } from '@/components/pages/typography'
+import Footer from '@/components/custom/footer'
+import { H1, H3, TextFormat } from '@/components/custom/typography'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import fetchData from '@/sanity/sanity.fetch'
+import { fetchProjects } from '@/sanity/sanity.fetch'
 import { ProjectsPageTypes } from '@/sanity/sanity.types'
 import { PortableTextBlock } from '@portabletext/types'
 import Image from 'next/image'
@@ -16,13 +17,15 @@ interface LinksTypes {
     demoLink: string
     githubLink: string
 }
+
 interface ContentTypes {
     name: string
     desc: PortableTextBlock
+    tags: string[]
 }
 
 export default async function Projects() {
-    const projectData: ProjectsPageTypes = await fetchData('projects', true)
+    const projectData: ProjectsPageTypes = await fetchProjects()
 
     return (
         <>
@@ -33,6 +36,7 @@ export default async function Projects() {
                         <ProjectContent
                             name={project.title}
                             desc={project.content}
+                            tags={project.tags}
                         />
                         <ProjectLinks
                             demoLink={project.demo}
@@ -70,7 +74,7 @@ const ProjectLinks: FC<LinksTypes> = ({ demoLink, githubLink }) => {
         <div className="flex items-center gap-6">
             <Button asChild variant="blockSlideTop">
                 <a target="_blank" href={demoLink}>
-                    Visit project
+                    Demo
                 </a>
             </Button>
             <Button asChild variant="blockSlideBot">
@@ -81,11 +85,23 @@ const ProjectLinks: FC<LinksTypes> = ({ demoLink, githubLink }) => {
         </div>
     )
 }
-const ProjectContent: FC<ContentTypes> = ({ name, desc }) => {
+
+const ProjectContent: FC<ContentTypes> = ({ name, desc, tags }) => {
     return (
-        <div>
+        <div className="space-y-1">
             <H3>{name}</H3>
+            <ProjectTags tags={tags} />
             <TextFormat value={desc} />
+        </div>
+    )
+}
+
+const ProjectTags: FC<{ tags: string[] }> = ({ tags }) => {
+    return (
+        <div className="flex flex-wrap gap-3">
+            {tags.map((tag, index) => (
+                <Badge key={index}>{tag}</Badge>
+            ))}
         </div>
     )
 }

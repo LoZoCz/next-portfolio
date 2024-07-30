@@ -1,10 +1,10 @@
-import Footer from '@/components/pages/footer'
-import { H1, H2, TextFormat } from '@/components/pages/typography'
-import fetchData from '@/sanity/sanity.fetch'
+import Footer from '@/components/custom/footer'
+import { H1, H2, TextFormat } from '@/components/custom/typography'
+import { fetchAbout } from '@/sanity/sanity.fetch'
 import { AboutPageTypes } from '@/sanity/sanity.types'
 
 export default async function About() {
-    const aboutData: AboutPageTypes = await fetchData('about', true)
+    const aboutData: AboutPageTypes = await fetchAbout()
 
     return (
         <>

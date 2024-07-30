@@ -5,6 +5,7 @@ export interface HomePageTypes {
     title: string
     bottomLink: string
     content: PortableTextBlock
+    language?: string
 }
 
 // About page ts types
@@ -12,6 +13,7 @@ export interface AboutPageTypes {
     title: string
     bottomLink: string
     aboutSections: AboutSection[]
+    language?: string
 }
 
 // Social links ts types
@@ -27,13 +29,15 @@ export interface ProjectsPageTypes {
     title: string
     bottomLink: string
     projects: Project[]
+    language?: string
 }
 
 // Contact page ts types
 export interface ContactPageTypes {
     title: string
-    content: PortableTextBlock
     bottomLink: string
+    content: PortableTextBlock
+    language?: string
 }
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -61,6 +65,7 @@ export interface AboutSection {
 export interface Project {
     title: string
     slug: Slug
+    tags: string[]
     github: string
     demo: string
     content: PortableTextBlock

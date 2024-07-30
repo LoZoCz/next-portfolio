@@ -15,7 +15,7 @@ export default function Template({ children, className }: MainProps) {
             animate={{ y: 0, opacity: 1 }}
             transition={{ ease: 'easeInOut', duration: 0.5 }}
             className={cn(
-                'mx-auto flex max-w-screen-lg flex-col justify-center gap-8 text-zinc-50 md:pb-4',
+                'mx-auto flex max-w-screen-lg flex-col justify-center gap-6 text-zinc-50',
                 className
             )}
         >

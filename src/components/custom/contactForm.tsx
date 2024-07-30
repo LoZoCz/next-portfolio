@@ -4,21 +4,21 @@ import { Textarea } from '../ui/textarea'
 import { Input } from '../ui/input'
 import { FC } from 'react'
 import { Button } from '../ui/button'
-import Loading from './Loading'
+import Loading from './loading'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
 import { toast } from 'react-toastify'
-import ErrorMess from '@/components/pages/ErrorMess'
+import ErrorMess from '@/components/custom/errorMess'
 
 const schema = z.object({
-    name: z.string().min(2, 'Pole imię jest wymagane'),
+    name: z.string().min(2, 'The first name field is required'),
     mail: z
         .string()
-        .email('Nieprawidłowy email')
-        .min(1, 'Pole email jest wymagane'),
-    content: z.string().min(1, 'Pole treść jest wymagane').max(500),
+        .email('Incorrect email')
+        .min(1, 'The email field is required'),
+    content: z.string().min(1, 'Content field is required').max(500),
 })
 
 type FormFieldsTypes = z.infer<typeof schema>
@@ -40,11 +40,11 @@ const ContactForm: FC = () => {
             body: JSON.stringify(data),
         })
             .then(() => {
-                toast.success('Wiadomość została wysłana!')
+                toast.success('Message has been sent!')
                 reset()
             })
             .catch((err) => {
-                toast.error('Wiadomość nie została wysłana.')
+                toast.error('Message has not been sent.')
                 throw new Error(err)
             })
     }
@@ -54,7 +54,7 @@ const ContactForm: FC = () => {
             <div className="relative">
                 <Input
                     type="text"
-                    placeholder="Autor..."
+                    placeholder="Author..."
                     className={cn('md:w-1/3', errors.name && 'border-red-500')}
                     {...register('name')}
                     autoComplete="on"
@@ -73,7 +73,7 @@ const ContactForm: FC = () => {
             </div>
             <div className="relative">
                 <Textarea
-                    placeholder="Wiadomość..."
+                    placeholder="Content..."
                     rows={6}
                     className={cn(
                         'md:w-3/4',
@@ -91,7 +91,7 @@ const ContactForm: FC = () => {
                 type="submit"
                 variant="blockBtn"
             >
-                {isSubmitting ? <Loading /> : 'Wyślij'}
+                {isSubmitting ? <Loading /> : 'Send'}
             </Button>
         </form>
     )
