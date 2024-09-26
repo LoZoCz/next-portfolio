@@ -1,58 +1,13 @@
+import {
+    AnchorProps,
+    ParaProps,
+    StrongProps,
+    UListProps,
+} from '@/lib/typographyTypes'
 import { cn } from '@/lib/utils'
-import { AnchorHTMLAttributes, FC, HTMLAttributes, ReactNode } from 'react'
-import { PortableText, PortableTextComponents } from '@portabletext/react'
-import { TypedObject } from '@portabletext/types'
-import { link } from 'fs'
+import { HeadingProps } from '@react-email/components'
 
-interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
-    children: string | ReactNode
-    className?: string
-}
-
-interface ParaProps extends HTMLAttributes<HTMLParagraphElement> {
-    children: string | ReactNode
-    className?: string
-}
-
-interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-    children: string | ReactNode
-    className?: string
-}
-
-interface StrongProps extends HTMLAttributes<HTMLElement> {
-    children: string | ReactNode
-    className?: string
-}
-
-interface UListProps extends HTMLAttributes<HTMLUListElement> {
-    children: string | ReactNode
-    className?: string
-}
-
-interface TextFormatProps {
-    value: TypedObject
-    className?: string
-}
-
-const textSerializers: PortableTextComponents = {
-    block: {
-        h1: ({ children }) => <H1>{children}</H1>,
-        h2: ({ children }) => <H2>{children}</H2>,
-        h3: ({ children }) => <H3>{children}</H3>,
-        normal: (props) => <Para>{props.children}</Para>,
-    },
-    marks: {
-        link: ({ children, value }) => (
-            <Anchor href={value.href}>{children}</Anchor>
-        ),
-        strong: ({ children }) => <Strong>{children}</Strong>,
-    },
-    list: {
-        bullet: ({ children }) => <BulletList>{children}</BulletList>,
-    },
-}
-
-export const H1: FC<HeadingProps> = ({ children, className, ...props }) => {
+export function H1({ children, className, ...props }: HeadingProps) {
     return (
         <h1
             {...props}
@@ -66,7 +21,7 @@ export const H1: FC<HeadingProps> = ({ children, className, ...props }) => {
     )
 }
 
-export const H2: FC<HeadingProps> = ({ children, className, ...props }) => {
+export function H2({ children, className, ...props }: HeadingProps) {
     return (
         <h2
             {...props}
@@ -79,7 +34,8 @@ export const H2: FC<HeadingProps> = ({ children, className, ...props }) => {
         </h2>
     )
 }
-export const H3: FC<HeadingProps> = ({ children, className, ...props }) => {
+
+export function H3({ children, className, ...props }: HeadingProps) {
     return (
         <h3
             {...props}
@@ -93,7 +49,7 @@ export const H3: FC<HeadingProps> = ({ children, className, ...props }) => {
     )
 }
 
-export const Para: FC<ParaProps> = ({ children, className, ...props }) => {
+export function Para({ children, className, ...props }: ParaProps) {
     return (
         <p
             {...props}
@@ -107,7 +63,7 @@ export const Para: FC<ParaProps> = ({ children, className, ...props }) => {
     )
 }
 
-export const Anchor: FC<AnchorProps> = ({ children, className, ...props }) => {
+export function Anchor({ children, className, ...props }: AnchorProps) {
     return (
         <a
             {...props}
@@ -121,7 +77,7 @@ export const Anchor: FC<AnchorProps> = ({ children, className, ...props }) => {
     )
 }
 
-export const Strong: FC<StrongProps> = ({ children, className, ...props }) => {
+export function Strong({ children, className, ...props }: StrongProps) {
     return (
         <strong
             {...props}
@@ -132,11 +88,15 @@ export const Strong: FC<StrongProps> = ({ children, className, ...props }) => {
     )
 }
 
-export const BulletList: FC<UListProps> = ({
-    children,
-    className,
-    ...props
-}) => {
+export function Italic({ children, className, ...props }: StrongProps) {
+    return (
+        <span {...props} className={cn('italic text-foreground', className)}>
+            {children}
+        </span>
+    )
+}
+
+export function BulletList({ children, className, ...props }: UListProps) {
     return (
         <ul
             {...props}
@@ -144,13 +104,5 @@ export const BulletList: FC<UListProps> = ({
         >
             {children}
         </ul>
-    )
-}
-
-export const TextFormat: FC<TextFormatProps> = ({ value, className }) => {
-    return (
-        <div className={cn('space-y-6', className)}>
-            <PortableText value={value} components={textSerializers} />
-        </div>
     )
 }

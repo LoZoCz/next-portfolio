@@ -1,51 +1,79 @@
 import Footer from '@/components/custom/footer'
-import { H1, H3, TextFormat } from '@/components/custom/typography'
+import { H1, H3 } from '@/components/custom/typography'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { fetchProjects } from '@/sanity/sanity.fetch'
-import { ProjectsPageTypes } from '@/sanity/sanity.types'
-import { PortableTextBlock } from '@portabletext/types'
+import { client } from '@/sanity/client'
+import { defineQuery } from 'next-sanity'
 import Image from 'next/image'
 import { FC, ReactNode } from 'react'
+import NotFound from '../not-found'
+import { imagesUrlGen } from '@/lib/imagesUrlGen'
+import { TextFormat } from '@/components/custom/TextFormat'
 
-interface ProjectCardProps {
+type ProjectCardProps = {
     image: string
     children: ReactNode
 }
 
-interface LinksTypes {
-    demoLink: string
-    githubLink: string
-}
+const options = { next: { revalidate: 360 } }
 
-interface ContentTypes {
-    name: string
-    desc: PortableTextBlock
-    tags: string[]
-}
+const PROJECTS_QUERY = defineQuery(
+    `*[_type == "Projects-Page"]{title,bottomLink,projects[]->{_id,title,slug,tags,github,demo,body,image}}`
+)
 
 export default async function Projects() {
-    const projectData: ProjectsPageTypes = await fetchProjects()
+    const projectsData = await client.fetch(PROJECTS_QUERY, {}, options)
+
+    if (!projectsData) {
+        NotFound()
+    }
+
+    const { title, projects, bottomLink } = projectsData[0]
 
     return (
         <>
-            <H1>{projectData.title}</H1>
+            <H1>{title}</H1>
             <section className="space-y-8">
-                {projectData.projects.map((project) => (
-                    <ProjectCard key={project._id} image={project.imageUrl}>
-                        <ProjectContent
-                            name={project.title}
-                            desc={project.content}
-                            tags={project.tags}
-                        />
-                        <ProjectLinks
-                            demoLink={project.demo}
-                            githubLink={project.github}
-                        />
-                    </ProjectCard>
-                ))}
+                {projects &&
+                    projects.map((project) => {
+                        const { _id, title, body, tags, demo, github, image } =
+                            project
+
+                        const imgUrl =
+                            image?.asset &&
+                            imagesUrlGen(image?.asset?._ref, 1024, 500)
+
+                        return (
+                            <ProjectCard
+                                key={_id}
+                                image={
+                                    imgUrl ||
+                                    'https://via.placeholder.com/1024x500'
+                                }
+                            >
+                                <div className="space-y-1">
+                                    <H3>{title}</H3>
+                                    <ProjectTags tags={tags || []} />
+                                    {body && <TextFormat value={body} />}
+                                </div>
+
+                                <div className="flex items-center gap-6">
+                                    <Button asChild variant="blockSlideTop">
+                                        <a target="_blank" href={demo || ''}>
+                                            Demo
+                                        </a>
+                                    </Button>
+                                    <Button asChild variant="blockSlideBot">
+                                        <a target="_blank" href={github || ''}>
+                                            Github
+                                        </a>
+                                    </Button>
+                                </div>
+                            </ProjectCard>
+                        )
+                    })}
             </section>
-            <Footer bottomLink={projectData.bottomLink} path="/contact" />
+            <Footer bottomLink={bottomLink || ''} path="/contact" />
         </>
     )
 }
@@ -57,7 +85,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ image, children }) => {
                 <Image
                     src={image}
                     alt="project main img"
-                    width={1000}
+                    width={1024}
                     height={500}
                     className="z-10 h-auto w-auto rounded-md"
                 />
@@ -66,33 +94,6 @@ const ProjectCard: FC<ProjectCardProps> = ({ image, children }) => {
                 {children}
             </div>
         </article>
-    )
-}
-
-const ProjectLinks: FC<LinksTypes> = ({ demoLink, githubLink }) => {
-    return (
-        <div className="flex items-center gap-6">
-            <Button asChild variant="blockSlideTop">
-                <a target="_blank" href={demoLink}>
-                    Demo
-                </a>
-            </Button>
-            <Button asChild variant="blockSlideBot">
-                <a target="_blank" href={githubLink}>
-                    Github
-                </a>
-            </Button>
-        </div>
-    )
-}
-
-const ProjectContent: FC<ContentTypes> = ({ name, desc, tags }) => {
-    return (
-        <div className="space-y-1">
-            <H3>{name}</H3>
-            <ProjectTags tags={tags} />
-            <TextFormat value={desc} />
-        </div>
     )
 }
 

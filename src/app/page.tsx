@@ -1,17 +1,29 @@
-import { H1, TextFormat } from '@/components/custom/typography'
-import { HomePageTypes } from '@/sanity/sanity.types'
+import { H1 } from '@/components/custom/typography'
 import Footer from '@/components/custom/footer'
-import { fetchHome } from '@/sanity/sanity.fetch'
+import { client } from '@/sanity/client'
+import { defineQuery } from 'next-sanity'
+import NotFound from './not-found'
+import { TextFormat } from '@/components/custom/TextFormat'
+
+const options = { next: { revalidate: 360 } }
+
+const HOME_QUERY = defineQuery(`*[_type == "home"]{title,body,bottomLink,}`)
 
 export default async function Home() {
-    const homeData: HomePageTypes = await fetchHome()
+    const home = await client.fetch(HOME_QUERY, {}, options)
+
+    if (!home) {
+        NotFound()
+    }
+
+    const { title, body, bottomLink } = home[0]
 
     return (
         <>
-            <H1>{homeData.title}</H1>
-            <TextFormat value={homeData.content} className="space-y-4" />
+            <H1>{title}</H1>
+            {body && <TextFormat value={body} className="space-y-4" />}
             <Footer
-                bottomLink={homeData.bottomLink}
+                bottomLink={bottomLink || ''}
                 path="/about"
                 classNames="mb-16"
             />
