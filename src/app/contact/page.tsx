@@ -5,7 +5,7 @@ import MainContToast from '@/components/custom/mainContToast'
 import { defineQuery } from 'next-sanity'
 import { client } from '@/sanity/client'
 import NotFound from '../not-found'
-import { TextFormat } from '@/components/custom/TextFormat'
+import { TextFormat } from '@/components/custom/textFormat'
 
 const options = { next: { revalidate: 360 } }
 

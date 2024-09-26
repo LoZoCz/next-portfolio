@@ -3,7 +3,7 @@ import Footer from '@/components/custom/footer'
 import { client } from '@/sanity/client'
 import { defineQuery } from 'next-sanity'
 import NotFound from './not-found'
-import { TextFormat } from '@/components/custom/TextFormat'
+import { TextFormat } from '@/components/custom/textFormat'
 
 const options = { next: { revalidate: 360 } }
 

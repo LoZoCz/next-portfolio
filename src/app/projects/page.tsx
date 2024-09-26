@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { FC, ReactNode } from 'react'
 import NotFound from '../not-found'
 import { imagesUrlGen } from '@/lib/imagesUrlGen'
-import { TextFormat } from '@/components/custom/TextFormat'
+import { TextFormat } from '@/components/custom/textFormat'
 
 type ProjectCardProps = {
     image: string

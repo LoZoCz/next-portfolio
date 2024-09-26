@@ -10,7 +10,7 @@ import {
     Para,
     Strong,
 } from './typography'
-import { SanityImage } from './SanityImage'
+import { SanityImage } from './sanityImage'
 import { cn } from '@/lib/utils'
 
 const textSerializers: PortableTextComponents = {

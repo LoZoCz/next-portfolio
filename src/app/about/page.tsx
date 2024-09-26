@@ -3,7 +3,7 @@ import { H1, H2 } from '@/components/custom/typography'
 import { client } from '@/sanity/client'
 import { defineQuery } from 'next-sanity'
 import NotFound from '../not-found'
-import { TextFormat } from '@/components/custom/TextFormat'
+import { TextFormat } from '@/components/custom/textFormat'
 
 const options = { next: { revalidate: 360 } }
 
@@ -19,8 +19,6 @@ export default async function About() {
     }
 
     const { title, aboutSections, bottomLink } = about[0]
-
-    console.log(aboutSections)
 
     return (
         <>
