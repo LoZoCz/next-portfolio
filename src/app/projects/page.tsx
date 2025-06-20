@@ -9,6 +9,7 @@ import { FC, ReactNode } from 'react'
 import NotFound from '../not-found'
 import { imagesUrlGen } from '@/lib/imagesUrlGen'
 import { TextFormat } from '@/components/custom/textFormat'
+import { cn } from '@/lib/utils'
 
 type ProjectCardProps = {
     image: string
@@ -20,6 +21,8 @@ const options = { next: { revalidate: 360 } }
 const PROJECTS_QUERY = defineQuery(
     `*[_type == "Projects-Page"]{title,bottomLink,projects[]->{_id,title,slug,tags,github,demo,body,image}}`
 )
+
+const IMAGE_SCALE = { width: 1024, height: 500 }
 
 export default async function Projects() {
     const projectsData = await client.fetch(PROJECTS_QUERY, {}, options)
@@ -85,9 +88,12 @@ const ProjectCard: FC<ProjectCardProps> = ({ image, children }) => {
                 <Image
                     src={image}
                     alt="project main img"
-                    width={1024}
-                    height={500}
-                    className="z-10 h-auto w-auto rounded-md"
+                    width={IMAGE_SCALE.width}
+                    height={IMAGE_SCALE.height}
+                    className={cn(
+                        'z-10 h-auto w-auto rounded-md',
+                        `w-${IMAGE_SCALE.width} h-${IMAGE_SCALE.height}`
+                    )}
                 />
             </div>
             <div className="static bottom-0 left-0 right-0 z-50 flex flex-col gap-4 self-end pt-4 lg:absolute lg:flex-row lg:items-end lg:justify-between lg:gap-12 lg:p-4">
